@@ -1,0 +1,54 @@
+<!-- USANDO EXTENDS VOCÊ ESTENDE A BASE OU OUTROS AQUIVOS HTML PARA PÁGINA -->
+<!-- USANDO {{ VARIAVEL }} VOCÊ PODE PASSAR UMA VARIAVEL PYTHON PARA O HTML  -->
+{% extends "base.html" %}
+
+{% block title %}
+    Perfil - {{ usuario.username }}
+{% endblock %}
+
+{% block body %}
+  {% include "nav_bar.html" %}
+  <div class="bloco-add-img"></div>
+    <h1>
+        Perfil: {{ usuario.username }}
+    </h1>
+    {% if form %}
+    <h2>
+      Enviar Foto
+    </h2>
+    <form method="POST" enctype="multipart/form-data" class="bloco-add-img">
+        {{ form.csrf_token }}
+        <div class="bloco-arquivo">
+            <label for="foto" class="botao-arquivo">
+              Escolher Arquivo
+              {{ form.foto(class="input-arquivo", id="foto") }}
+            </label>
+          <span id="imagem-arquivo" class=""></span>
+        </div>
+        {{ form.botao_foto(class="botao-login") }}
+    </form>
+    {% endif %}
+
+    <div class="conteudo">
+      {% for foto in usuario.fotos %}
+          <!-- COMO CARREGAR UMA IMAGEM DA PASTA STATIC -->
+              <div class="bloco-imagem">
+                <a href="{{ url_for('post', id_post=foto.id) }}">
+                  <img src="{{ url_for('static', filename='/fotos_post/{}'.format(foto.imagem)) }}"/>
+                </a>
+              </div>  
+      {% endfor %}
+    </div>  
+  </div>
+  <script>
+    let input = document.getElementById("foto");
+    let imagemArquivo = document.getElementById("imagem-arquivo");
+
+    input.addEventListener("change", () => {
+      let inputImagem = document.querySelector("input[type=file]").files[0];
+
+      imagemArquivo.classList.add("visivel");
+      imagemArquivo.innerText = inputImagem.name;
+    });
+  </script>  
+{% endblock %}

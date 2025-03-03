@@ -1,0 +1,26 @@
+<!-- AQUI ESTÁ A BASE PRINCIPAL DOS ARQUIVOS HTML -->
+
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- AQUI ESTÁ O SCRIPT PARA FORMATAÇÃO DA PÁGINA É NECESSARIO PASSA-LÓ PARA RENDERIZAR OS CSS DA PÁGINA -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/CSS/style.css') }}">
+    <!-- AQUI ESTÁ O TÍTULO DA PAGINA USANDO O BLOCK TITLE É 
+     POSSIVEL CRIAR UM TITULO DINAMICO -->     
+    <title>
+      {% block title %}
+
+      {% endblock %}
+    </title>
+  </head>
+  <body style="text-align: center;">
+    <div class="container-fluid">
+      <!-- AQUI ESTÁ O CORPO DA PAGINA USANDO O BLOCK BODY E POSSIVEL ESTENDER A BASE.HMTL PARA OUTRAS PAGINAS -->
+      {% block body %}
+
+      {% endblock %}
+    </div>
+  </body>
+</html>
