@@ -3,21 +3,38 @@
 {% block body %}
 {% include "nav_bar.html" %}
 <div class="container" style="text-align: center;">
-<h1>Postagem do perfil: {{ usuario.username }}</h1>
-<hr>
-{% if post.id_usuario == current_user.id %}
-<form method="POST">
-<button class="botao-login" name="excluir">
-    Excluir Postagem
-</button>
-</form>
-<div class="bloco-imagem">
-    <img src="{{ url_for('static', filename='/fotos_post/{}'.format(post.imagem)) }}" style=" width: 700px; height: auto;"/>
-</div>
-{% else %}
-<div class="bloco-imagem">
-    <img src="{{ url_for('static', filename='/fotos_post/{}'.format(post.imagem)) }}" style=" width: 700px; height: auto;"/>
-</div>
+    <h1>Postagem do perfil: {{ usuario.username }}</h1>
+    <hr>
+
+    {% if current_user.email== "admin@gmail.com" %}
+    <form method="POST">
+        <button class="botao-login" name="excluir">
+            Excluir Postagem
+        </button>
+        <hr>
+        <br>
+
+        <div class="bloco-imagem">
+            <img src="{{ url_for('static', filename='/fotos_post/{}'.format(post.imagem)) }}" style=" width: 700px; height: auto;"/>
+        </div>
+    </form>
+
+    {% elif post.id_usuario == current_user.id %}
+    <form method="POST">
+        <button class="botao-login" name="excluir">
+            Excluir Postagem
+        </button>
+        <hr>
+        <br>
+        <div class="bloco-imagem">
+            <img src="{{ url_for('static', filename='/fotos_post/{}'.format(post.imagem)) }}" style=" width: 700px; height: auto;"/>
+        </div>
+    </form>
+    
+    {% else %}
+    <div class="bloco-imagem">
+        <img src="{{ url_for('static', filename='/fotos_post/{}'.format(post.imagem)) }}" style=" width: 700px; height: auto;"/>
+    </div>
 </div>
 {% endif %}
 {% endblock %}

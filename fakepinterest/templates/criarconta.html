@@ -38,7 +38,8 @@
     </nav>
 </header>
 
-<img src="{{ url_for('static', filename='/fotos_site/fundo-login.png') }}" class="bg-imagem-pinterest" />
+<img src="{{ url_for('static', filename='/fotos_site/fundo-login.png') }}">
+
 <div class="container-popup">
     <form method="POST" class="popup">
         {{ form.csrf_token }}
